@@ -1,0 +1,3 @@
+Currently in the works is a Springboot rest API that will simulate takeing a food order from the client (their name, what was order, and amount spent) and store it in a MySql database.
+The controller for this api will gather the information via GET, POST, PUT, and DELETE requests. This is a collaborative project that will be spearheaded by me and facilitated by a team of 4 Cloud Engineering peers.
+This backend project will be live on github pages for Postman testing by mid January 2025. My Team and I look forward to delivering a finished product that meets the desired criteria set for this project.
