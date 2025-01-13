@@ -6,7 +6,7 @@ build/
 !**/src/test/**/build/
 
 ### Ignore DB
-/src/main/resources/application.properties
+application.properties
 
 ### STS ###
 .apt_generated
