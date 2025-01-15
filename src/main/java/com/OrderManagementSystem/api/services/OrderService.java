@@ -1,27 +1,35 @@
 package com.OrderManagementSystem.api.services;
 
+import com.OrderManagementSystem.api.dto.OrderDto;
+import com.OrderManagementSystem.api.mappers.OrderMapper;
 import com.OrderManagementSystem.api.models.Order;
 import com.OrderManagementSystem.api.repositories.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
-public class Services {
+public class OrderService {
     @Autowired
     private OrderRepository orderRepository;
 
-    public Order createOrder(String name,String food_Item, Double amount_Spent ){
-        Order order = new Order(name, food_Item, amount_Spent);
-        return orderRepository.save(order);
+    public OrderDto createOrder(OrderDto orderDto){
+        Order order = OrderMapper.toEntity(orderDto);
+        order = orderRepository.save(order);
+        return OrderMapper.toDto(order);
     }
-    public Order getOrderById(long id){
-        return orderRepository.findById(id).orElse(null);
+    public OrderDto getOrderById(long id){
+        return orderRepository.findById(id)
+                .map(OrderMapper::toDto)
+                .orElse(null);
     }
 
-    public List<Order> getAllOrders(){
-        return orderRepository.findAll();
+    public List<OrderDto> getAllOrders(){
+        return orderRepository.findAll().stream()
+                .map(OrderMapper::toDto)
+                .collect(Collectors.toList());
     }
     public boolean updateOrder(Long id, String name, String food_Item, Double amount_Spent){
         Order order = orderRepository.findById(id).orElse(null);
